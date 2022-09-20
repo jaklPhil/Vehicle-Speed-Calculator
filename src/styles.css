@@ -1,0 +1,61 @@
+/* You can add global styles to this file, and also import other style files */
+.header img {
+    float: right;
+    float: top;
+    width: 40%;
+    height: auto;
+    background: rgb(128, 127, 127);
+  }
+.mark-disabled {
+    pointer-events: none;
+    border: 1px solid grey;
+    font-size: 0;
+    background-color: lightgrey;
+}
+.redakt{
+    background: rgba(25, 167, 6, 0.322) !important;
+}
+
+.mark-calc {
+    background-color: rgba(23, 98, 8, 0.26);
+}
+
+.desc{
+  background: rgb(160, 182, 255);
+}
+
+.unit{
+  background: rgba(5, 5, 5, 0.372);
+  font-size: 80%;
+  height: 100%;
+}
+.unit-input{
+  font-size: 90% !important;
+  height: 100%;
+}
+.form-control{
+  font-size: 110%;
+  height: 100%;
+}
+.span-2{
+  
+  grid-column-end: span 2;
+}
+.span-10{
+  
+  grid-column-end: span 10;
+}
+
+.input-group {
+       display: grid;
+       grid-template-columns: 3fr 2fr 2fr ;
+   }
+@media only screen and (min-width: 1000px) {
+  .input-group {
+    
+    display: grid;
+    grid-template-columns: 3fr 2fr 1fr 3fr 2fr 1fr ;
+  } 
+}
+
+

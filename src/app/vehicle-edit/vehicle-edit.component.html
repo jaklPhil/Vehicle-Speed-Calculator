@@ -1,0 +1,313 @@
+
+<div class="container bg-light" id="body">
+    
+    <div aria-colindex="4" class="header">
+        <img  aria-colindex="4" id="pic"  src=""  class="img-thumbnail ">
+    </div>
+    <h1 *ngIf="!redakteurView" class="mb-3">Fahrt Auswerten</h1>
+    <h1 *ngIf="redakteurView" class="mb-3">Fafrzeugvorlage definieren</h1>
+    <h2 class="mb-1">1. Fahrzeug</h2>
+    
+<form class="p-1  bg-light" [formGroup]="form" (change)="update()" (ng-change)="update()" (ngSubmit)="onSubmit()">
+      
+    
+    
+        
+    
+    <div  class="input-group  mb-1">
+        
+       
+        <div class="">
+            <span [ngClass]="{'redakt': redakteurView}" class="input-group-text desc">Name</span>
+        </div>
+
+        <span class="span-2" >
+        
+        <input 
+            type="text" 
+            class="form-control "
+            formControlName="name"  
+            id="name" 
+            placeholder="Fahrezug Namen eingeben"
+            [ngClass]="{
+                'is-invalid': form.controls.name.invalid && form.controls.name.dirty, 
+                'is-valid': form.controls.name.valid && form.controls.name.dirty}"
+            >
+            </span>    
+    
+        <div class="">
+            <span  [ngClass]="{'redakt': redakteurView}" class="input-group-text desc">Fahrzeugtyp</span>
+        </div>
+
+        <span class="span-2">
+        <div class="input-group-append">
+            <select class="form-control  form-select" 
+            aria-label=".form-select-lg example"
+            (change)="setTyp()"
+            formControlName="typ" 
+        
+            id="typ">
+                <option>Fahrrad</option>
+                <option>PKW</option>
+                <option>LKW</option>
+                <option>Motorrad</option>
+              </select>
+        </div>
+    </span>
+
+    </div>
+    <div id="msgAntrieb" class="alert alert-success" role="alert" style="display:none">
+        Antirebsart wurde an das Fahrzeug angepasst!
+      </div>
+    &nbsp; 
+    <h4 class="mb-3">1.1. Fahrzeug Werte</h4>
+
+    <div class="input-group  mb-1">
+        <div class="input-group-append ">
+            <span  [ngClass]="{'redakt': redakteurView}" class="input-group-text desc">Gewicht</span>
+        </div>
+
+        <span>
+        <input 
+            type="number" 
+            class="form-control" 
+            formControlName="weight" 
+            id="weight" 
+            data-toggle="tooltip" data-placement="bottom" title="Tooltip on bottom"
+            placeholder="Gewicht eingeben"
+            [ngClass]="{
+                'is-invalid': form.controls.weight.invalid && form.controls.weight.dirty, 
+                'is-valid': form.controls.weight.valid && form.controls.weight.dirty}">
+            </span>
+                <div class="input-group-append ">
+                    <span class="input-group-text unit" >kg</span>
+                </div>
+              
+            
+        <div class="input-group-append ">
+            <span  [ngClass]="{'redakt': redakteurView}" class="input-group-text desc" >Passagier Gewicht</span>
+        </div>
+        <span>
+        <input 
+            type="number" 
+            class="form-control " 
+            formControlName="passengerWeight" 
+            id="passengerWeight" 
+            placeholder="Gewicht eingeben"
+            [ngClass]="{
+                'is-invalid': form.controls.passengerWeight.invalid && form.controls.passengerWeight.dirty, 
+                'is-valid': form.controls.passengerWeight.valid && form.controls.passengerWeight.dirty}">
+        </span>
+                <div class="input-group-append">
+                    <span class="input-group-text unit" >kg</span>
+                </div>
+           
+    </div>
+    
+
+
+    <div class="input-group mb-1">
+        <div class="input-group-append">
+            <span  [ngClass]="{'redakt': redakteurView}" class="input-group-text desc" >Luftwiderstand</span>
+        </div>
+        <span>
+        <input 
+            type="number" 
+            class="form-control" 
+            formControlName="cwVal" 
+            id="cwVal" 
+            placeholder="Cw-Wert eingeben"
+            [ngClass]="{
+                'is-invalid': form.controls.cwVal.invalid && form.controls.cwVal.dirty, 
+                'is-valid': form.controls.cwVal.valid && form.controls.cwVal.dirty}"
+                >
+            </span>
+                <div class="input-group-append">
+                    <span class="input-group-text unit" >Faktor</span>
+                </div>
+ 
+        <div class="input-group-append">
+            <span  [ngClass]="{'redakt': redakteurView}" class="input-group-text desc" >Stirnfläche</span>
+        </div>
+        <span>
+        <input 
+            type="number" 
+            class="form-control col-3" 
+            formControlName="area" 
+            id="area" 
+            placeholder="Fläche eingeben"
+            [ngClass]="{
+                'is-invalid': form.controls.area.invalid && form.controls.area.dirty, 
+                'is-valid': form.controls.area.valid && form.controls.area.dirty}">
+            </span>
+            <div class="input-group-append">
+                <span class="input-group-text unit" >m²</span>
+            </div>
+    </div>
+
+    <div class="input-group mb-1">
+        <div class="input-group-append">
+            <span  [ngClass]="{'redakt': redakteurView}" class="input-group-text desc" >Abrollwiderstand</span>
+        </div>
+        <span>
+        <input 
+            type="number" 
+            class="form-control" 
+            formControlName="urVal" 
+            id="urVal" 
+            placeholder="Ur-Wert eingeben"
+            [ngClass]="{
+                'is-invalid': form.controls.urVal.invalid && form.controls.urVal.dirty, 
+                'is-valid': form.controls.urVal.valid && form.controls.urVal.dirty}"
+                >
+        </span>
+        <div class="input-group-append ">
+            <span class="input-group-text unit">Faktor</span>
+        </div>
+                
+        <div class="input-group-append ">
+            <span  [ngClass]="{'redakt': redakteurView}" class="input-group-text desc" >Antriebs Effizienz</span>
+        </div>
+        <span>
+        <input 
+            type="number" 
+            class="form-control" 
+            formControlName="driveEff" 
+            id="driveEff" 
+            placeholder="Effizienz eingeben"
+            aria-describedby="basic-addon2"
+            [ngClass]="{
+                'is-invalid': form.controls.driveEff.invalid && form.controls.driveEff.dirty, 
+                'is-valid': form.controls.driveEff.valid && form.controls.driveEff.dirty}">
+        </span>
+        <div class="input-group-append ">
+            <span class="input-group-text unit" >%</span>
+        </div>
+        
+    </div>
+    &nbsp; 
+    
+
+    <h4 class="mb-3">1.2. Antrieb</h4>
+    <div class="input-group mb-1">
+        <div class="input-group-append ">
+            <span  [ngClass]="{'redakt': redakteurView}" class="input-group-text desc " >Antriebsart</span>
+        </div>
+        <span class="span-2" >
+        <select class="form-control form-select" 
+            aria-label=".form-select-lg example"
+            formControlName="driveTyp" 
+            id="driveTyp"
+            (change)="setValidation()">
+                <option>Motor</option>
+                <option>Mensch</option>
+              </select>
+            </span>
+           
+ 
+            <div  *ngIf="this.motor" class="input-group-append">
+                <span  [ngClass]="{'redakt': redakteurView}" class="input-group-text desc " >Kraftstoff</span>
+            </div>
+            <span class="span-2" *ngIf="this.motor" >
+            <input
+           
+                type="text" 
+                class="form-control" 
+                formControlName="fuel" 
+                id="fuel" 
+                placeholder="Kraftstoff eingeben"
+                [ngClass]="{
+                    'is-invalid': form.controls.fuel.invalid && form.controls.fuel.dirty, 
+                    'is-valid': form.controls.fuel.valid && form.controls.fuel.dirty}">
+                  
+                </span>
+                
+
+            <div *ngIf="!this.motor" class="input-group-append">
+                <span  [ngClass]="{'redakt': redakteurView}" class="input-group-text desc">Muskel Effizienz</span>
+            </div>
+            <span>
+            <input 
+            *ngIf="!this.motor"
+                type="number" 
+                class="form-control" 
+                formControlName="muscleEff" 
+                id="muscleEff" 
+                placeholder="Wirkungsgrad eingeben"
+                [ngClass]="{
+                    'is-invalid': form.controls.muscleEff.invalid && form.controls.muscleEff.dirty, 
+                    'is-valid': form.controls.muscleEff.valid && form.controls.muscleEff.dirty}">
+                    <div></div>
+                </span>     
+                    <div *ngIf="!this.motor" class="input-group-append">
+                        <span class="input-group-text unit" >%</span>
+                    </div>
+    
+       
+            
+                
+    </div>
+
+        <div *ngIf="this.motor"> 
+        <div class="input-group mb-1">
+            <div class="input-group-append">
+                <span  [ngClass]="{'redakt': redakteurView}" class="input-group-text desc">Motor Effizienz</span>
+            </div>
+            <span >
+            <input 
+                type="number" 
+                class="form-control" 
+                formControlName="engineEff" 
+                id="engineEff" 
+                placeholder="Wirkungsgrad eingeben"
+                [ngClass]="{
+                    'is-invalid': form.controls.engineEff.invalid && form.controls.engineEff.dirty, 
+                    'is-valid': form.controls.engineEff.valid && form.controls.engineEff.dirty}">
+                </span>
+                    <div class="input-group-append">
+                    <span class="input-group-text unit" >%</span>
+                </div>            
+          
+            <div class="input-group-append">
+                <span  [ngClass]="{'redakt': redakteurView}" class="input-group-text desc">Energiedichte</span>
+            </div>
+
+            <span>
+            <input 
+                type="number" 
+                class="form-control" 
+                formControlName="fuelEnergie" 
+                id="fuelEnergie" 
+                placeholder="Energiedichte pro Lieter eingeben"
+                [ngClass]="{
+                    'is-invalid': form.controls.fuelEnergie.invalid && form.controls.engineEff.dirty , 
+                    'is-valid': form.controls.fuelEnergie.valid && form.controls.engineEff.dirty }">
+                </span>
+                    <div class="input-group-append">
+                    <span class="input-group-text unit" >kWh/L</span>
+                </div>
+        </div>
+    </div>
+
+</form>
+     
+<button *ngIf="!completed && !redakteurView"  (click)="onSubmit()"  value="true" class="btn btn-primary">2. Fahrt</button>
+    
+<button *ngIf="redakteurView"  [ngClass]="{'disabled': form.invalid }" value="true"  (click)="onSubmit()" class="btn btn-primary redakt-btn" >Vorlage Aktualisieren / Speichern</button>
+&nbsp; 
+<button *ngIf="!completed" type="button" class="btn btn-secondary" (click)="cancel()">Abbrechen</button>
+
+<div id="msgReady" class="alert alert-success" role="alert" style="display:none">Fahrrzeug erfolgreich eingegeben!</div>
+<div id="msgUpdate" class="alert alert-success" role="alert" style="display:none">Werte wurden aktualisiert!</div>
+<div id="msgError" class="alert alert-danger" role="alert" style="display:none">Nicht möglich, Werte Prüfen!</div>
+    
+ 
+    
+ 
+  <div #fahrt>
+    <ng-container  *ngIf="completed">
+        <app-speed-view></app-speed-view>
+    </ng-container>
+</div>
+</div>
+ 

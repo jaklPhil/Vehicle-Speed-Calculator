@@ -1,0 +1,87 @@
+
+
+
+<form  class="p-1 bg-light" >
+
+
+   
+    <h2 class="mb-3">3. Auswerung</h2>
+    <div>
+        <div class="input-group mb-1">
+            <div class="input-group-append ">
+                <span class="input-group-text desc " >Energieverbrauch</span>
+            </div>
+            <span  class="input-group-text" id="energie" 
+                   >{{this.trip.energie | number: '1.0-3'}}        
+            </span> 
+            <div class="input-group-append">
+                <span class="input-group-text unit" >(kW/h)/{{toLenght}}</span>
+                </div>
+     
+                <div  *ngIf="this.motor" class="input-group-append">
+                    <span class="input-group-text desc " >Kraftstoffverbrauch</span>
+                </div>
+                <span *ngIf="this.motor" 
+                    id="calories"
+                    class="input-group-text"
+                   >{{this.vehicle.engine.fuelUsage | number: '1.0-3'}}        
+                </span>
+                <div *ngIf="this.motor" class="input-group-append">
+                    <span class="input-group-text unit" >Liter/{{toLenght}}</span>
+                </div>
+                    
+    
+                <div *ngIf="!this.motor" class="input-group-append">
+                    <span class="input-group-text desc">Kalorienverbrauch</span>
+                </div>
+                <span *ngIf="!this.motor" id="calories" class="input-group-text"
+                   >{{this.vehicle.human.calories | number: '1.0-3'}}        
+            </span>     
+                        <div *ngIf="!this.motor" class="input-group-append">
+                            <span class="input-group-text unit" >cal/{{toLenght}}</span>
+                        </div>
+        </div>
+
+
+        <div class="input-group mb-1">
+            <div class="input-group-append ">
+                <span class="input-group-text desc " >Energieverbrauch</span>
+            </div>
+            <span  class="input-group-text" id="energie" 
+                   >{{this.energieToKm | number: '1.0-3'}}        
+            </span> 
+            <div class="input-group-append">
+                <span class="input-group-text unit" >(kW/h)/{{toUnit}}</span>
+                </div>
+     
+                <div  *ngIf="this.motor" class="input-group-append">
+                    <span class="input-group-text desc " >Kraftstoffverbrauch</span>
+                </div>
+                <span *ngIf="this.motor" 
+                    id="calories"
+                    class="input-group-text"
+                   >{{this.fuel100Km | number: '1.0-3'}}        
+                </span>
+                <div *ngIf="this.motor" class="input-group-append">
+                    <span class="input-group-text unit" >Liter/{{toUnit}}</span>
+                </div>
+                    
+    
+                <div *ngIf="!this.motor" class="input-group-append">
+                    <span class="input-group-text desc">Kalorienverbrauch</span>
+                </div>
+                <span *ngIf="!this.motor" id="calories" class="input-group-text"
+                   >{{this.calories1Km | number: '1.0-3'}}        
+                </span>     
+                <div *ngIf="!this.motor" class="input-group-append">
+                    <span class="input-group-text unit" >cal/{{toUnit}}</span>
+                </div>
+        </div>
+    </div>
+   
+    
+   
+    <button  type="button" class="btn btn-primary" (click)="cancel()">Neue Berechung</button>
+    <div id="msgReady2" class="alert alert-success" role="alert" style="display:none">Fahrt erfolgreich eingegeben!</div>
+  </form>
+  <div data-alerts="alerts"  data-ids="myid" data-fade="3000"></div>

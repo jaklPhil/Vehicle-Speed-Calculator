@@ -1,0 +1,50 @@
+<h1  class="mb-3">Fahrzeugvorlagen</h1>
+<table class="table table-bordered">
+    <thead>
+        <td scope="col">#</td>
+        <td scope="col">Name</td>
+        <td scope="col">Typ</td>
+        <td scope="col">Gewicht</td>
+        <td scope="col">Stirnfläche</td>
+        <td scope="col">Antriebsart</td>
+    </thead>
+    <tbody>
+        <tr *ngFor="let vehicle of vehicles; let i = index" (click)="onSelect(i)"
+            [ngClass]="vehicle == selected ? 'table-info' : ''" >
+        <td scope="row">{{i+1}}</td>
+        <td>{{vehicle.name}}</td>
+        <td>{{vehicle.typ}}</td>
+        <td>{{vehicle.weight}} kg</td>
+        <td>{{vehicle.area}} m²</td>
+        <td>{{vehicle.driveTyp}}</td>
+        
+    </tr>
+    </tbody>
+</table>
+<button [ngClass]="selected == null ? 'disabled' : ''" (click)="modify()" type="button" class="btn btn-primary">Weiter mit Auswahl</button>
+<br> 
+
+
+<button 
+    [ngClass]="!loggedIn ? 'disabled, invisible' : ''"  
+    class="btn btn-secondary"
+    (click)="onNew()"
+>neue Vorlage</button>
+&nbsp;
+<button  
+    [ngClass]="{'disabled, invisible' :!loggedIn,
+                'disabled':!selected}" 
+    class="btn btn-danger"  
+    type="button" 
+    (click)="delete()"
+>Vorlage löschen</button>
+&nbsp;
+
+<button 
+    [ngClass]="{'disabled, invisible' :!loggedIn,
+    'disabled':!selected}"
+    class="btn btn-success"
+    (click)="edit()"
+>Vorlage bearbeiten</button>
+
+<br>

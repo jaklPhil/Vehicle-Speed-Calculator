@@ -1,0 +1,20 @@
+<form>
+    <div class="form-group">
+      <label for="email">Email address</label>
+      <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email" #email>
+      <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+    </div>
+<!-- #password is template reference val -->
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" class="form-control" id="pasword" placeholder="Password" #password>
+    </div>
+    <br>
+<!-- (click) passes values to Funktion in ts) -->
+    <button type="submit" class="btn btn-primary" (click)="submitLogin()">Login</button>
+    &nbsp;
+    <button type="button" class="btn btn-secondary" (click)="email.value=''; password.value =''">Zurücksetzen</button>
+  </form>
+  <br>
+  <!-- only shows when ngif true -->
+  <div class="alert alert-danger" role="alert" *ngIf="login_failed">Login Fehlgeschlagen</div>

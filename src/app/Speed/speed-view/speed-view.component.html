@@ -1,0 +1,254 @@
+
+
+<form  class="p-1 bg-light" [formGroup]="form"  (ngSubmit)="onSubmit()">
+
+
+   
+    <h2 class="mb-3">2. Fahrt</h2>
+    <h4 class="mb-1">2.1 Umgebung</h4>
+    <div>
+        <div class="input-group form-group mb-1">
+            <div class="input-group-append">
+                <span class="input-group-text desc" >Luftdichte</span>
+            </div>
+            <span>
+
+           
+            <input 
+                type="number" 
+                class="form-control"
+                formControlName="airDesity"  
+                (change)="recalculateCondition()"
+                id="airDesity" 
+            
+                [ngClass]="{
+                    'is-invalid': form.controls.airDesity.invalid && form.controls.airDesity.dirty, 
+                    'is-valid': form.controls.airDesity.valid && form.controls.airDesity.dirty}"
+                >
+            </span>
+                <div class="input-group-append "> 
+                <span
+                class="input-group-text unit" >kg/m³</span>
+            </div>   
+          
+            <div class="input-group-append">
+                <span class="input-group-text desc">Untergrund</span>
+            </div>
+            <span>
+            <input 
+                type="number" 
+                class="form-control"
+                formControlName="surface"  
+                (change)="recalculateCondition()"
+                id="surface" 
+            
+                [ngClass]="{
+                    'is-invalid': form.controls.surface.invalid && form.controls.surface.dirty, 
+                    'is-valid': form.controls.surface.valid && form.controls.surface.dirty}"
+                >
+            </span>
+                <div class="input-group-append"> 
+                <span href="https://de.wikipedia.org/wiki/Str%C3%B6mungswiderstand" 
+                target="_blank" rel="noreferrer noopener" 
+                class="input-group-text unit " >Faktor</span>
+            </div>   
+        </div>
+    </div>
+    <h4 class="mb-1">2.2. Leistung</h4>
+    <p class="mb-1">Die eingabe eines Wertes berechnet automatisch alle anderen.</p>
+    <div>
+        <div class="input-group form-group mb-1">
+            <div class="input-group-append">
+                <span class="input-group-text desc" >Geschwindigkeit</span>
+            </div>
+            <span>
+
+           
+            <input 
+                (change)="calculate($event)"
+                type="number" 
+                class="form-control"
+                formControlName="velocity"  
+                id="velocity" 
+            
+                [ngClass]="{
+                    'is-invalid': form.controls.velocity.invalid && form.controls.velocity.dirty, 
+                    'is-valid': form.controls.velocity.valid && form.controls.velocity.dirty,
+                    'mark-calc':this.caller != 'velocity' && this.speedSet}"
+                >
+            </span>
+                <div class="input-group-append"> 
+                <span
+                class="input-group-text unit" >km/h</span>
+            </div>   
+            
+            <div class="input-group-append ">
+                <span class="input-group-text desc" >Fahrwiderstand</span>
+            </div>
+            <span>
+            
+            <input 
+                (change)="calculate($event)"
+                
+                type="number" 
+                class="form-control"
+                formControlName="driveResistance"  
+                id="driveResistance" 
+            
+                [ngClass]="{
+                    'is-invalid': form.controls.driveResistance.invalid && form.controls.driveResistance.dirty, 
+                    'is-valid': form.controls.driveResistance.valid && form.controls.driveResistance.dirty,
+                    'mark-calc':this.caller != 'driveResistance' && this.speedSet}"
+                >
+            </span>
+                <div class="input-group-append"> 
+                <span href="https://de.wikipedia.org/wiki/Str%C3%B6mungswiderstand" 
+                target="_blank" rel="noreferrer noopener" 
+                class="input-group-text unit " >N</span>
+            </div>   
+        </div>
+    </div>
+    <div>
+        <div class="input-group form-group mb-1">
+            <div class="input-group-append">
+                <span class="input-group-text desc" >Radleistung</span>
+            </div>
+            <span>
+            <input 
+                (change)="calculate($event)"
+                type="number" 
+                class="form-control"
+                formControlName="wheelPower"  
+                id="wheelPower" 
+            
+                [ngClass]="{
+                    'is-invalid': form.controls.wheelPower.invalid && form.controls.wheelPower.dirty, 
+                    'is-valid': form.controls.wheelPower.valid && form.controls.wheelPower.dirty,
+                    'mark-calc':this.caller != 'wheelPower' && this.speedSet}"
+                >
+            </span>
+            <div class="input-group-append">
+                <select class="form-control  form-select unit-input" 
+                aria-label=".form-select-lg example"
+                id="unitWheel"
+                formControlName="unitWheel" 
+                (change)="setUnit($event)">
+                    <option>Watt</option>
+                    <option>kW</option>
+                    <option>Ps</option>
+                  
+                  </select>
+            </div>   
+         
+            <div class="input-group-append ">
+                <span class="input-group-text desc">Antriebsleistung</span>
+            </div>
+            <span>
+            <input 
+                (change)="calculate($event)"
+                type="number" 
+                class="form-control"
+                formControlName="drivePower"  
+                id="drivePower" 
+            
+                [ngClass]="{
+                    'is-invalid': form.controls.drivePower.invalid && form.controls.drivePower.dirty, 
+                    'is-valid': form.controls.drivePower.valid && form.controls.drivePower.dirty,
+                    'mark-calc':this.caller != 'drivePower' && this.speedSet}"
+                >
+            </span>
+            <div class="input-group-append">
+                <select class="form-control  form-select unit-input" 
+                aria-label=".form-select-lg example"
+                formControlName="unitDrive" 
+                (change)="setUnit($event)"
+                id="unitDrive">
+                    <option>Watt</option>
+                    <option>kW</option>
+                    <option>Ps</option>
+                  
+                  </select>
+            </div>  
+        </div>
+    </div>
+    <p  class="mb-1">{{decription}}</p>
+
+    <div  >
+    <h4 class="mb-1">2.3. Fahrt Länge</h4>
+    <div>
+        <div class="input-group form-group mb-1">
+            <div class="input-group-append ">
+                <span class="input-group-text desc" id="basic-addon3">Strecke</span>
+            </div>
+            <span>
+            <input 
+     
+                type="number" 
+                class="form-control"
+                formControlName="lenght"  
+                (change)="calculate($event)"
+                id="lenght"
+                [ngClass]="{
+                    'is-invalid': form.controls.lenght.invalid && form.controls.lenght.dirty, 
+                    'is-valid': form.controls.lenght.valid && form.controls.lenght.dirty,
+                    'mark-disabled':this.speedSet == false
+                }"
+                >
+            </span>
+                <div class="input-group-append"> 
+                <span
+                class="input-group-text unit" >km</span>
+            </div>   
+           
+            <div class="input-group-append">
+                <span class="input-group-text desc" >Zeit</span>
+            </div>
+            <span>
+
+            <input 
+            (change)="calculate($event)"
+                type="number" 
+                class="form-control"
+                formControlName="tripTime" 
+                id="tripTime" 
+                [ngClass]="{
+                    'is-invalid': form.controls.tripTime.invalid && form.controls.tripTime.dirty, 
+                    'is-valid': form.controls.tripTime.valid && form.controls.tripTime.dirty,
+                    'mark-disabled':this.speedSet == false
+                }">
+            </span>
+            <div class="input-group-append">
+                <select class="form-control  form-select unit-input" 
+                aria-label=".form-select-lg example"
+                formControlName="unitTime" 
+                (change)="setUnitTime()"
+                id="unitTime">
+                    <option>min</option>
+                    <option>Std</option>
+                    <option>s</option>
+                  </select>
+            </div> 
+                 
+        </div>
+    </div>
+</div>
+</form>
+    <button *ngIf="!completed" [ngClass]="{'disabled':this.ready == false}" (click)="onSubmit()" class="btn btn-primary">3. Auswertung</button>
+    &nbsp;
+    <button *ngIf="!completed" type="button" class="btn btn-secondary" (click)="cancel()">Abbrechen</button>
+    <div id="msgUpdateTrip" class="alert alert-success" role="alert" style="display:none">Fahrt erfolgreich aktualisiert!</div>
+
+    <div id="msgReadyTrip" class="alert alert-success" role="alert" style="display:none">Fahrt erfolgreich eingegeben!</div>
+    <div id="msgErrorTrip" class="alert alert-danger" role="alert" style="display:none">Eingaben Prüfen!</div>
+    <div id="msgError" class="alert alert-danger" role="alert" style="display:none">Nicht möglich, Werte Prüfen!</div>
+    <div id="msgErrorSpeed" class="alert alert-danger" role="alert" style="display:none">Geschwindigkeit muss größer als null sein!</div>
+ 
+ 
+<div>
+    <ng-container *ngIf="completed" >
+        <app-trip-view class="disabled"></app-trip-view>
+        
+    </ng-container>
+</div>
+
+ 
