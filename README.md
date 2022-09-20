@@ -1,5 +1,9 @@
-# WebProjekt
+# Vehicle Speed Calculator
+Link to the hosted application ["Vehicle Speed Calculator"](https://webprojekt-10cc6.web.app/).
 
+Implematation details [(Wiki)](https://github.com/jaklPhil/Vehicle-Speed-Calculator/wiki)
+
+# Build
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.0.3.
 
 ## Development server
